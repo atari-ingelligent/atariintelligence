@@ -7,7 +7,7 @@
   --deep-2:#0F3A3C;
   --on-deep:#F2F7F5; --on-deep-muted:#B7CBC6;
   /* Optional hero photo: e.g. --hero-image: url('assets/hero.webp'); */
-  --hero-image: none;
+  --hero-image: url('assets/hero1.png');
   --heading:'Space Grotesk', 'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
   --sans:'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
   --gutter: clamp(16px, 6vw, 120px);
