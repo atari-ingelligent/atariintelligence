@@ -58,10 +58,15 @@
     img.addEventListener('load', function(){ slot.classList.remove('missing'); });
   });
 
-  // Contact form (front-end only: connect to a form service or backend to receive messages)
+  // Contact form: sends messages through FormSubmit (https://formsubmit.co). No account needed.
+  // Put the inbox that should receive messages here. The first message triggers a one-time
+  // confirmation email from FormSubmit to this address: click the link in it to activate the form.
+  var TO_EMAIL = 'info@atariintelligence.com.au';
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + TO_EMAIL;
   var form = document.getElementById('contact-form');
   var err = document.getElementById('form-error');
   var note = document.getElementById('form-note');
+  var sendBtn = form.querySelector('button[type="submit"]');
   form.addEventListener('submit', function(e){
     e.preventDefault();
     note.hidden = true;
@@ -74,7 +79,35 @@
     if (!msg) problems.push('a short message');
     if (problems.length) { err.textContent = 'Please add ' + problems.join(', ') + '.'; err.hidden = false; return; }
     err.hidden = true;
-    note.hidden = false;
-    form.reset();
+    sendBtn.disabled = true;
+    var label = sendBtn.textContent;
+    sendBtn.textContent = 'Sending…';
+    var honey = form.querySelector('[name="_honey"]');
+    var data = {
+      name: name,
+      email: email,
+      industry: document.getElementById('f-industry').value || 'Not specified',
+      message: msg,
+      _subject: 'New website enquiry from ' + name,
+      _replyto: email,
+      _template: 'table',
+      _honey: honey ? honey.value : ''
+    };
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function(res){ return res.json().then(function(body){ return { ok: res.ok, body: body }; }); })
+      .then(function(r){
+        if (!r.ok || String(r.body.success) !== 'true') throw new Error('Send failed');
+        note.hidden = false;
+        form.reset();
+      })
+      .catch(function(){
+        err.textContent = "Your message couldn't be sent. Please try again or email us at " + TO_EMAIL + '.';
+        err.hidden = false;
+      })
+      .then(function(){ sendBtn.disabled = false; sendBtn.textContent = label; });
   });
 })();

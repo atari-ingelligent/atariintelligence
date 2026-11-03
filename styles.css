@@ -71,18 +71,18 @@ body:not(.is-loading) .loader{opacity:0;visibility:hidden}
 }
 
 /* Hero */
-.hero{position:relative;overflow:hidden;color:var(--on-deep);background:var(--deep);min-height:min(100vh,900px);display:flex;flex-direction:column;justify-content:flex-end;padding-top:calc(var(--header-h) + 64px);padding-bottom:56px}
+.hero{position:relative;overflow:hidden;color:var(--on-deep);background:var(--deep);min-height:min(88vh,820px);display:flex;flex-direction:column;justify-content:center;padding-top:calc(var(--header-h) + 48px);padding-bottom:48px}
 .hero-bg{position:absolute;inset:0;background:
   linear-gradient(180deg,rgba(11,42,46,.55) 0%,rgba(11,42,46,.2) 40%,rgba(11,42,46,.92) 100%),
   var(--hero-image) center/cover no-repeat,
   radial-gradient(120% 90% at 80% 30%,#14504D 0%,var(--deep) 60%)}
 .hero > .wrap{width:100%}
-.hero-grid-lines{position:absolute;inset:0;width:100%;height:100%;color:rgba(127,211,194,.22)}
+.hero-grid-lines{position:absolute;inset:0;width:100%;height:100%;color:rgba(127,211,194,.12)}
 .orbit-lines{animation:spin 90s linear infinite;transform-origin:930px 330px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .hero-inner{position:relative;display:flex;flex-direction:column;gap:22px;margin-bottom:clamp(48px,7vw,88px)}
 .hero h1{font-size:clamp(44px,6.5vw,88px);line-height:1.02}
-.hero-sub{margin:0;font-size:clamp(19px,2vw,24px);color:var(--on-deep-muted);max-width:34ch}
+.hero-sub{margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:var(--on-deep-muted);max-width:52ch}
 .hero-sub em{color:#FFFFFF;font-style:normal;font-family:var(--heading);font-weight:500}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px;padding-top:8px}
 
